@@ -165,10 +165,28 @@ class ProductItem extends Product
 
     public function massDelete($productsSelected)
     {
+
+        if (!is_array($productsSelected)) {
+            return (object) ['message' => 'Invalid product IDs, send an array of IDs instead'] ;
+        }
+
         $idsString = implode(",", $productsSelected);
         $query = "DELETE FROM products WHERE id IN ($idsString)";
+        $getProducts = "SELECT * FROM products";
+
         if ($this->conn->query($query)) {
-            return (object) ['message' => 'Products deleted succesfully'];
+            $result = $this->conn->query($getProducts);
+            if ($result) {
+                if ($result->num_rows > 0) {
+                    $rows = $result->fetch_all(MYSQLI_ASSOC);
+                    return $rows;
+                } else {
+                    return [];
+                }
+            } else {
+                return ['error' => "Error executing query: " . $this->conn->error];
+            }
+
         } else {
             return (object) ['message' => 'Error deleting Products'];
         }
