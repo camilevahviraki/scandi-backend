@@ -25,17 +25,22 @@ if ($conn->connect_error) {
 }
 
 if ($conn->query($create_db) === true) {
-    
+
     $conn->select_db($database);
 
-    if($conn->query($table_product) === false){
+    if ($conn->query($table_product) === false) {
         echo "Error creating tables!";
-    }else {
+    } else {
         // echo "Tables created and/or connected successfully!";
     }
-    
+
 } else {
     echo "Error creating database: " . $conn->error;
 }
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Max-Age: 86400");
 
 ?>
