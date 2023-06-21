@@ -2,7 +2,8 @@
 require_once 'product.php';
 require_once 'dbConnection.php';
 
-abstract class Router{
+abstract class Router
+{
     abstract public function getRoute($route);
 
 }
@@ -22,11 +23,10 @@ class HandleRouter extends Router
             $this->displayProducts();
         } elseif ($route === '/newProduct') {
             $newProduct = $_POST['data'];
-            $data = json_decode($newProduct);
-            $this->addProduct($data);
+            $newProduct = json_decode($newProduct);
+            $this->addProduct($newProduct);
         } elseif ($route === '/deleteProducts') {
-            $ids = $_POST['data'];
-            $data = json_decode($ids);
+            $data = $_POST['data'];
             $this->deleteProducts($data);
         } else {
             echo "405 Unknown method";
@@ -46,6 +46,9 @@ class HandleRouter extends Router
     {
         $productItem = new ProductItem($this->dbConnection);
         $response = $productItem->massDelete($data);
+        $response = (object) [
+            'products' => $response
+        ];
         header('Content-Type: application/json');
         echo json_encode($response);
     }
@@ -54,7 +57,7 @@ class HandleRouter extends Router
     {
         $productItem = new ProductItem($this->dbConnection);
         $response = $productItem->display();
-        $response = (object)[
+        $response = (object) [
             'products' => $response
         ];
         header('Content-Type: application/json');
