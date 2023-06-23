@@ -49,7 +49,7 @@
 
 ### Frontend Repositiry <a name="backend"></a>
 
-- [Frontend repo](https://github.com/camilevahviraki/scandi-backend)
+- [Frontend repo](https://github.com/camilevahviraki/scandi-test-frontend)
 
 
 ## 💻 Getting Started <a name="getting-started"></a>
