@@ -47,7 +47,7 @@
 
 - [Live Demo Link](https://juniortest-camile-vahviraki.netlify.app/)
 
-### Frontend Repositiry <a name="backend"></a>
+### Frontend Repository <a name="backend"></a>
 
 - [Frontend repo](https://github.com/camilevahviraki/scandi-test-frontend)
 
