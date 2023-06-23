@@ -1,4 +1,8 @@
 <?php
+// $servername = "sql100.infinityfree.com";
+// $username = "if0_34483068";
+// $password = "ZOpZJmRcr8wZp12";
+// $database = "if0_34483068_scandi_junior_test_db";
 $servername = "localhost";
 $username = "camile";
 $password = "root";
@@ -30,15 +34,13 @@ if ($conn->query($create_db) === true) {
 
     if ($conn->query($table_product) === false) {
         echo "Error creating tables!";
-    } else {
-        // echo "Tables created and/or connected successfully!";
     }
 
 } else {
     echo "Error creating database: " . $conn->error;
 }
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:3000");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Max-Age: 86400");

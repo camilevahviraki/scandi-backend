@@ -18,17 +18,22 @@ class HandleRouter extends Router
     }
     public function getRoute($route)
     {
+        if ($route === '/') {
 
-        if ($route === '/products') {
-            $this->displayProducts();
-        } elseif ($route === '/newProduct') {
-            $newProduct = $_POST['data'];
-            $newProduct = json_decode($newProduct);
-            $this->addProduct($newProduct);
-        } elseif ($route === '/deleteProducts') {
-            $data = $_POST['data'];
-            $this->deleteProducts($data);
-        } else {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $data = $_POST['data'];
+                $delete = $_POST['delete'];
+                if ($delete === 1) {
+                    $this->deleteProducts($data);
+                } else {
+                    $newProduct = json_decode($data);
+                    $this->addProduct($newProduct);
+                }
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $this->displayProducts();
+            }
+
+        }else {
             echo "405 Unknown method";
         }
 
